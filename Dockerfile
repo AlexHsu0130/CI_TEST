@@ -1,24 +1,6 @@
-# Use the official maven/Java 8 image to create a build artifact.
-# https://hub.docker.com/_/maven
-FROM maven:3.8-jdk-8 as builder
-
-# Copy local code to the container image.
-#WORKDIR /app
-#COPY pom.xml
-#COPY src
-
-# Build a release artifact.
-RUN mvn -DskipTests spring-boot:build-image
-
-# Use AdoptOpenJDK for base image.
-# It's important to use OpenJDK 8u191 or above that has container support enabled.
-# https://hub.docker.com/r/adoptopenjdk/openjdk8
-# https://docs.docker.com/develop/develop-images/multistage-build/#use-multi-stage-builds
-#FROM adoptopenjdk/openjdk8
-
-# Copy the jar to the production image from the builder stage.
-#COPY --from=builder /app/target/demo-*.jar /demo.jar
-#COPY --from=builder /app/target/demo-*.jar /demo.jar
-
-# Run the web service on container startup.
-#CMD ["java", "-Djava.security.egd=file:/dev/./urandom", "-jar", "/demo.jar"]
+# 该镜像需要依赖的基础镜像
+FROM fabric8/java-alpine-openjdk8-jre
+# 将当前目录下的jar包复制到docker容器的/目录下
+ADD target/demo.jar /app/demo.jar
+# 指定docker容器启动时运行jar包
+ENTRYPOINT ["java", "-jar","app/demo.jar"]
