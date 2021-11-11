@@ -29,7 +29,8 @@ jobs:
           ${{ runner.os }}-maven-
 # 编译打包      
     - name: Build with Maven
-      run: mvn package -Dmaven.test.skip=true    
+      run: mvn package -Dmaven.test.skip=true  
+      run: mkdir app && cp target/*.jar app  
 
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
