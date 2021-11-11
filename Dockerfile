@@ -11,4 +11,4 @@ FROM openjdk:8u171-jre-slim
 COPY --from=builder /target/demo-*.jar /demo.jar
 
 # 指定docker容器启动时运行jar包
-ENTRYPOINT ["java", "-jar","./demo.jar"]
+ENTRYPOINT ["java", "-jar","demo.jar"]
