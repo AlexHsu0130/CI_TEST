@@ -9,4 +9,4 @@ FROM openjdk:8u171-jre-slim
 #ADD target/demo.jar /app/demo.jar
 
 # 指定docker容器启动时运行jar包
-ENTRYPOINT ["java", "-jar","/app/demo.jar"]
+ENTRYPOINT ["java", "-jar","./app/demo.jar"]
